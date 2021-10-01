@@ -32,7 +32,6 @@ namespace BlazorEmailSender
             services.AddSingleton(mailAccount);
             services.AddScoped<IMailService, MailService>();
             services.AddSingleton<WeatherForecastService>();
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
