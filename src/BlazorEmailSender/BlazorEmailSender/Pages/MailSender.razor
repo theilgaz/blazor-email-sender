@@ -1,0 +1,24 @@
+﻿@page "/sendemail"
+
+<h3>MailSender</h3>
+
+<button @onclick="SendEmail" class="btn btn-primary btn-lg">Send Mail</button>
+
+@code {
+    
+    [Inject]
+    public IMailService Service { get; set; }
+
+    async void SendEmail()
+    {
+        string html = new ComponentRenderer<MailBody>()
+            .Set(x => x.Caption, "Order Details")
+            .Set(x => x.SenderName, "Abdullah Ilgaz")
+            .Set(x => x.SenderAddress, "Baker Street 221A")
+            .Set(x => x.CustomerName, "Sherlock Holmes")
+            .Set(x => x.CustomerAddress, "Baker Street 221B")
+            .Render();
+        await Service.SendEmailAsync("receiver@companymail.com", "Hello from Blazor Client", html);
+        StateHasChanged();
+    }
+}
